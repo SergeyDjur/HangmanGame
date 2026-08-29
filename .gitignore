@@ -1,0 +1,25 @@
+
+# --- IntelliJ IDEA ---
+.idea/
+out/
+*.iml
+
+# --- Eclipse (на всякий случай) ---
+.classpath
+.project
+.settings/
+bin/
+
+# --- VS Code ---
+.vscode/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+
+# --- Secrets ---
+*.env
+.env
