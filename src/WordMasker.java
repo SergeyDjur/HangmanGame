@@ -7,6 +7,9 @@ public class WordMasker {
     public WordMasker() throws IOException {
 
     }
+    public String getWord() {
+        return word;
+    }
 
     public String getMaskedWord() {
         StringBuilder wordBuilder = new StringBuilder(word.length());
