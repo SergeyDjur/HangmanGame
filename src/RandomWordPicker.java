@@ -16,8 +16,8 @@ public class RandomWordPicker {
         }
         while (true) {
             int index = RANDOM.nextInt(lines.size());
-            String word = lines.get(index).trim();
-            if (word.trim().length() < MIN_WORD_LENGTH || word.trim().length() > MAX_WOR_LENGTH) {
+            String word = lines.get(index).trim().toLowerCase();
+            if (word.trim().toLowerCase().length() < MIN_WORD_LENGTH || word.trim().length() > MAX_WOR_LENGTH) {
                 continue;
             }
             return word;
