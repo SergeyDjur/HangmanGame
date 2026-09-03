@@ -44,9 +44,14 @@ public class UserMenu {
                 System.out.println("only letters allowed, type a single letter");
                 continue;
             }
-            return symbol;
+            if (symbol >= 'а' && symbol <= 'я' || symbol >= 'А' && symbol <= 'Я') {
+                return symbol;
+            } else {
+                System.out.println("only russian language supports, type a russian letter");
+
+            }
+
         }
     }
-    
 
 }
