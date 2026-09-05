@@ -1,5 +1,5 @@
 
-public class HangmanPrinter {
+public class HangmanStages {
     private final String[] stagesOfHangman = {
             """
     ---------
@@ -67,7 +67,7 @@ public class HangmanPrinter {
     """
     };
 
-    public void printHangmanStage(int amountMistakes) {
+    public void print(int amountMistakes) {
 
         System.out.println(stagesOfHangman[amountMistakes]);
     }
