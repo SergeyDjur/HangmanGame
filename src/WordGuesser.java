@@ -4,7 +4,7 @@ import java.io.IOException;
 public class WordGuesser {
     WordMasker masker = new WordMasker();
 
-    HangmanPrinter printer = new HangmanPrinter();
+    HangmanStages printer = new HangmanStages();
     UserMenu menu = new UserMenu();
 
     String maskedWord = masker.getMaskedWord();
@@ -48,31 +48,31 @@ public class WordGuesser {
 
     public void run() {
 
-            while (true) {
-                System.out.println(maskedWord);
-                printer.printHangmanStage(amountMistakes);
-                char symbol = Character.toLowerCase(menu.getSymbolFromUser());
-                if (isWordContainsLetter(symbol)) {
-                    updateMaskedWord(symbol);
-                } else {
-                    amountMistakes++;
-                    printer.printHangmanStage(amountMistakes);
-                }
-                if (!maskedWord.contains("*")) {
-                    System.out.println("you win");
-                    break;
-                }
-                if (amountMistakes == MAX_AMOUNT_MISTAKES) {
-                    System.out.println("you lost");
-                    System.out.println("word you tried to guess is " + wordToGuess);
-                    break;
-                }
-
+        while (true) {
+            System.out.println(maskedWord);
+            printer.print(amountMistakes);
+            char symbol = Character.toLowerCase(menu.getSymbolFromUser());
+            if (isWordContainsLetter(symbol)) {
+                updateMaskedWord(symbol);
+            } else {
+                amountMistakes++;
+                printer.print(amountMistakes);
+            }
+            if (!maskedWord.contains("*")) {
+                System.out.println("you win");
+                break;
+            }
+            if (amountMistakes == MAX_AMOUNT_MISTAKES) {
+                System.out.println("you lost");
+                System.out.println("word you tried to guess is " + wordToGuess);
+                break;
             }
 
         }
 
     }
+
+}
 
 
 
