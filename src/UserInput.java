@@ -25,7 +25,7 @@ public class UserInput {
                 System.out.println("only letters allowed, type a single letter");
                 continue;
             }
-            if (symbol >= 'а' && symbol <= 'я') {
+            if (symbol >= 'а' && symbol <= 'я' || symbol == 'ё') {
                 return symbol;
             }
             System.out.println("only russian language supports, type a russian letter");
