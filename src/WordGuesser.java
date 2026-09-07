@@ -10,7 +10,7 @@ public class WordGuesser {
     private final UserInput input;
     private final Set<Character> wrongLetters = new HashSet<>();
 
-    String word;
+    private String word;
     private String maskedWord;
 
     private static final int MAX_AMOUNT_MISTAKES = 6;
@@ -59,12 +59,14 @@ public class WordGuesser {
         word = picker.getRandomWordFromFile("russianNouns.txt");
         maskedWord = masker.getMaskedWord(word);
     }
-public void printWrongLetters() {
-    System.out.println("wrong letters : ");
-        for(char c : wrongLetters) {
+
+    public void printWrongLetters() {
+        System.out.println("wrong letters : ");
+        for (char c : wrongLetters) {
             System.out.println(c);
         }
-}
+    }
+
     private boolean isWordContainsLetter(char symbol) {
 
         for (int i = 0; i < word.length(); i++) {
