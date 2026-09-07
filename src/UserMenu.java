@@ -5,10 +5,10 @@ public class UserMenu {
     private final Scanner scanner;
     private static final int START = 1;
     private static final int QUIT = 2;
+
     public UserMenu(Scanner scanner) {
         this.scanner = scanner;
     }
-
 
 
     public int getCommand() {
@@ -22,6 +22,7 @@ public class UserMenu {
 
             }
             int userInputChoice = scanner.nextInt();
+            scanner.nextLine();
             if (userInputChoice != START && userInputChoice != QUIT) {
                 System.out.printf("make a choice between '%d' OR '%d'  \n", START, QUIT);
                 continue;
