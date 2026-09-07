@@ -1,6 +1,6 @@
 
 public class HangmanStages {
-    private final String[] stagesOfHangman = {
+    private static final String[] STAGES = {
             """
     ---------
     |    |
@@ -67,10 +67,14 @@ public class HangmanStages {
     """
     };
 
-    public void print(int amountMistakes) {
-
-        System.out.println(stagesOfHangman[amountMistakes]);
+    public void printStages(int amountMistakes) {
+        System.out.println(STAGES[amountMistakes]);
     }
+
+    public void printLoseGameState() {
+        System.out.println(STAGES[6]);
+    }
+
 
 }
 
