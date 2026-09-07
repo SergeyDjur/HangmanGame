@@ -6,21 +6,29 @@ import java.util.Random;
 
 public class RandomWordPicker {
     private static final Random RANDOM = new Random();
-    private static final int MIN_WORD_LENGTH = 4;
-    private final static int MAX_WOR_LENGTH = 8;
+    private final int minLength;
+    private final int maxLength;
 
-    public String getRandomWordFromFile(String filePath) throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get(filePath));
-        if (lines.isEmpty()) {
-            throw new RuntimeException("file with words is empty");
-        }
-        while (true) {
-            int index = RANDOM.nextInt(lines.size());
-            String word = lines.get(index).trim().toLowerCase();
-            if (word.trim().toLowerCase().length() < MIN_WORD_LENGTH || word.trim().length() > MAX_WOR_LENGTH) {
-                continue;
+    public RandomWordPicker(int minLength, int maxLength) {
+        this.minLength = minLength;
+        this.maxLength = maxLength;
+
+    }
+
+    public String getRandomWordFromFile(String filePath) {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(filePath));
+            while (true) {
+                int index = RANDOM.nextInt(lines.size());
+                String word = lines.get(index).trim().toLowerCase();
+                int length = word.length();
+                if (length < minLength || length > maxLength) {
+                    continue;
+                }
+                return word;
             }
-            return word;
+        } catch (IOException e) {
+            throw new RuntimeException("unable to read a file : " + filePath + e);
         }
     }
 
