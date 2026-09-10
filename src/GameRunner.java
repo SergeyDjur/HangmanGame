@@ -1,43 +1,26 @@
-import java.util.Scanner;
 
 public class GameRunner {
-    Scanner scanner = new Scanner(System.in);
-    WordGuesser guesser;
-    UserMenu menu;
-    RandomWordPicker picker;
-    WordMasker masker;
-    UserInput input;
-    HangmanStages stages;
+    private final WordGuesser guesser;
+    private final UserMenu menu;
 
 
-    public GameRunner() {
-        menu = new UserMenu(scanner);
-        input = new UserInput(scanner);
-        picker = new RandomWordPicker(4, 8);
-        masker = new WordMasker();
-        stages = new HangmanStages();
-        guesser = new WordGuesser(input, picker, masker, stages);
+    public GameRunner(UserMenu menu, WordGuesser guesser) {
+        this.menu = menu;
+        this.guesser = guesser;
     }
 
     public void runHangman() {
-
-        int choice;
-        do {
-            choice = menu.getCommand();
-            if (choice == 1) {
+        int start = menu.getStart();
+        int quit = menu.getQuit();
+        while (true) {
+            int command = menu.getCommand();
+            if (command == start) {
                 guesser.start();
-            }
-            if (choice == 2) {
+            } else if (command == quit) {
                 System.out.println("game is closing");
+                return;
             }
-        } while (choice == 1);
-
-        scanner.close();
+        }
     }
 
-    public static void main(String[] args) {
-        GameRunner runner = new GameRunner();
-        runner.runHangman();
-
-    }
 }
