@@ -10,6 +10,14 @@ public class UserMenu {
         this.scanner = scanner;
     }
 
+    public int getStart() {
+        return START;
+    }
+
+    public int getQuit() {
+        return QUIT;
+    }
+
 
     public int getCommand() {
         System.out.printf(" MAKE A CHOICE BETWEEN %d OR %d \n", START, QUIT);
