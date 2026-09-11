@@ -67,16 +67,16 @@ public class HangmanStages {
     """
     };
 
-    public void printStages(int amountMistakes) {
-        System.out.println(STAGES[amountMistakes]);
+    public String getStage(int amountMistakes) {
+        return STAGES[amountMistakes];
     }
 
-    public void printLoseGameState() {
-        System.out.println(STAGES[6]);
+    public String getLoseGameState() {
+        return STAGES[STAGES.length - 1];
     }
-
 
 }
+
 
 
 
