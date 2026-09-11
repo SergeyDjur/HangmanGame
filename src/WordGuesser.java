@@ -8,6 +8,7 @@ public class WordGuesser {
     private int amountMistakes;
     private final RandomWordPicker picker;
     private final UserInput input;
+    private final HangmanView view;
     private final Set<Character> wrongLetters = new HashSet<>();
 
     private String word;
@@ -16,37 +17,37 @@ public class WordGuesser {
     private static final int MAX_AMOUNT_MISTAKES = 6;
 
 
-    public WordGuesser(UserInput input, RandomWordPicker picker, WordMasker masker, HangmanStages stages) {
+    public WordGuesser(UserInput input, RandomWordPicker picker, WordMasker masker, HangmanStages stages, HangmanView view) {
         this.input = input;
         this.picker = picker;
         this.masker = masker;
         this.stages = stages;
-
+        this.view = view;
     }
 
 
     public void start() {
         reset();
         while (!isGameOver()) {
-            printMaskedWord();
-            stages.printStages(amountMistakes);
+            view.printMaskedWord(maskedWord);
+            view.printStage(stages.getStage(amountMistakes));
             char symbol = Character.toLowerCase(input.getLetter());
 
             if (isWordContainsLetter(symbol)) {
                 updateMaskedWord(symbol);
             } else if (!wrongLetters.contains(symbol)) {
                 wrongLetters.add(symbol);
-                printWrongLetters();
+                view.printWrongLetters(wrongLetters);
                 amountMistakes++;
             } else {
-                printWarningMessage();
+                view.printWarningMessage();
             }
 
             if (isWin()) {
-                printWinMessage();
+                view.printWinMessage();
             } else if (isLose()) {
-                printLoseMessage();
-                stages.printLoseGameState();
+                view.printLoseMessage(word);
+                view.printLoseGameState(stages.getLoseGameState());
             }
 
         }
@@ -60,12 +61,6 @@ public class WordGuesser {
         maskedWord = masker.getMaskedWord(word);
     }
 
-    public void printWrongLetters() {
-        System.out.println("wrong letters : ");
-        for (char c : wrongLetters) {
-            System.out.println(c);
-        }
-    }
 
     private boolean isWordContainsLetter(char symbol) {
 
@@ -93,29 +88,12 @@ public class WordGuesser {
 
     }
 
-    private void printWarningMessage() {
-        System.out.println("you've already typed this letter ,you cant do it twice");
-    }
-
-
-    private void printMaskedWord() {
-        System.out.println(maskedWord);
-    }
-
     private boolean isWin() {
         return !maskedWord.contains("*");
     }
 
     private boolean isLose() {
         return amountMistakes >= MAX_AMOUNT_MISTAKES;
-    }
-
-    private void printWinMessage() {
-        System.out.println("you win");
-    }
-
-    private void printLoseMessage() {
-        System.out.println("you lose, word you tried to guess is " + word);
     }
 
     private boolean isGameOver() {
